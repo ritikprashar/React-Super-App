@@ -1,0 +1,17 @@
+img {
+  width: 49vw;
+  height: 100vh;
+}
+
+.bottomText {
+  position: absolute;
+  bottom: 9vh;
+  left: 3.7vw;
+  background-color: transparent;
+  color: #fff;
+  font-size: 42px;
+  font-family: Roboto;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  max-width: 50vw;
+}
