@@ -1,12 +1,18 @@
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Type from "./pages/Type";
 import React from "react";
 
-function App() {
+const App = () => {
   return (
     <>
-      <Home />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/type" element={<Type />} />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;
