@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SignUp.module.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ function SignUp() {
   const [mailError, setMailError] = useState("");
   const [mobileError, setMobileError] = useState("");
   const [checkboxError, setCheckboxError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedName = localStorage.getItem("inputName");
@@ -91,9 +93,14 @@ function SignUp() {
     } else {
       setMobileError("");
     }
-    if (isChecked) {
-    } else {
+    if (!isChecked) {
       setCheckboxError("Check this box if you want to proceed");
+      isValid = false;
+    } else {
+      setCheckboxError("");
+    }
+    if (isValid) {
+      navigate("/type");
     }
     return isValid;
   };
