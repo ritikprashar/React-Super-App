@@ -1,211 +1,145 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./SignUp.module.css";
 import { useNavigate } from "react-router-dom";
 
-function SignUp() {
-  const [name, setName] = useState("");
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [isChecked, setIsChecked] = useState("");
-
-  const [nameError, setNameError] = useState("");
-  const [userNameError, setUserNameError] = useState("");
-  const [mailError, setMailError] = useState("");
-  const [mobileError, setMobileError] = useState("");
-  const [checkboxError, setCheckboxError] = useState("");
+const SignUp = () => {
+  const [formValues, setFromValues] = useState({
+    check: false,
+    name: "",
+    username: "",
+    mail: "",
+    mobile: "",
+  });
+  const [nameError, setNameError] = useState(false);
+  const [userNameError, setUserNameError] = useState(false);
+  const [mailError, setMailError] = useState(false);
+  const [mobileError, setMobileError] = useState(false);
+  const [signUpError, setSignUpError] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedName = localStorage.getItem("inputName");
-    const storedUserName = localStorage.getItem("inputUserName");
-    const storedMail = localStorage.getItem("inputEmail");
-    const storedMobile = localStorage.getItem("inputMobile");
-
-    if (storedName) {
-      setName(storedName);
-    }
-    if (storedUserName) {
-      setUserName(storedUserName);
-    }
-    if (storedMail) {
-      setEmail(storedMail);
-    }
-    if (storedMobile) {
-      setMobile(storedMobile);
-    }
-  }, []);
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    setNameError("");
+  const handleChange = (e) => {
+    setFromValues({ ...formValues, [e.target.name]: e.target.value });
   };
-  const handleUserNameChange = (e) => {
-    setUserName(e.target.value);
-    setUserNameError("");
-  };
-  const handleMailChange = (e) => {
-    setEmail(e.target.value);
-    setMailError("");
-  };
-  const handleMobileChange = (e) => {
-    setMobile(e.target.value);
-    setMobileError("");
-  };
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
-    if (!e.target.checked) {
-      setCheckboxError("Check this box if you want to proceed");
-    } else {
-      setCheckboxError("");
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("inputName", name);
-    localStorage.setItem("inputUserName", userName);
-    localStorage.setItem("inputEmail", email);
-    localStorage.setItem("inputMobile", mobile);
+    let valid = true;
+    if (!(formValues.name.trim().length > 0)) {
+      setNameError(true);
+      valid = false;
+    } else {
+      setNameError(false);
+    }
+    if (!(formValues.username.trim().length > 0)) {
+      setUserNameError(true);
+      valid = false;
+    } else {
+      setUserNameError(false);
+    }
+    if (!(formValues.mail.trim().length > 0)) {
+      setMailError(true);
+      valid = false;
+    } else {
+      setMailError(false);
+    }
+    if (!(formValues.mobile.trim().length > 0)) {
+      setMobileError(true);
+      valid = false;
+    } else {
+      setMobileError(false);
+    }
+    if (!formValues.check) {
+      setSignUpError(true);
+      valid = false;
+    } else {
+      setSignUpError(false);
+    }
 
-    let isValid = true;
-    if (!name.match(/^[a-zA-Z]{2,30}$/)) {
-      setNameError("Field is Required");
-      isValid = false;
-    } else {
-      setNameError("");
-    }
-    if (!userName.match(/^[a-zA-Z0-9_]{3,20}$/)) {
-      setUserNameError("Field is Required");
-      isValid = false;
-    } else {
-      setUserNameError("");
-    }
-    if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-      setMailError("Field is Required");
-      isValid = false;
-    } else {
-      setMailError("");
-    }
-    if (!mobile.match(/^[0-9]{10}$/)) {
-      setMobileError("Field is Required");
-      isValid = false;
-    } else {
-      setMobileError("");
-    }
-    if (!isChecked) {
-      setCheckboxError("Check this box if you want to proceed");
-      isValid = false;
-    } else {
-      setCheckboxError("");
-    }
-    if (isValid) {
+    if (valid) {
+      window.localStorage.setItem("userData", JSON.stringify(formValues));
       navigate("/type");
     }
-    return isValid;
   };
-
-  useEffect(() => {
-    const handleUnload = () => {
-      localStorage.removeItem("inputName");
-      localStorage.removeItem("inputUserName");
-      localStorage.removeItem("inputEmail");
-      localStorage.removeItem("inputMobile");
-    };
-    window.onbeforeunload = handleUnload;
-
-    return () => {
-      window.onbeforeunload = null;
-    };
-  }, []);
-
   return (
     <div className={styles.container}>
-      <h1>Super app</h1>
-      <p>Create your new account</p>
+      <h1>Super App</h1>
+      <p>Create a new Account</p>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
-          onChange={handleNameChange}
-          style={{
-            border: nameError && name === "" ? "1px solid #F00" : "none",
-          }}
-          value={name}
+          onChange={(e) => handleChange(e)}
           type="text"
+          name="name"
           placeholder="Name"
-          name={name}
-        />
-        {nameError && <p className={styles.error}>{nameError}</p>}
-
+        ></input>
+        {nameError ? <p className={styles.error}>Field is Required</p> : <></>}
         <input
-          value={userName}
-          onChange={handleUserNameChange}
-          style={{
-            border:
-              userNameError && userName === "" ? "1px solid #F00" : "none",
-          }}
+          onChange={(e) => handleChange(e)}
           type="text"
-          placeholder="UserName"
           name="username"
-        />
-        {userNameError && <p className={styles.error}>{userNameError}</p>}
-
+          placeholder="UserName"
+        ></input>
+        {userNameError ? (
+          <p className={styles.error}>Field is Required</p>
+        ) : (
+          <></>
+        )}
         <input
-          value={email}
-          onChange={handleMailChange}
-          style={{
-            border: mailError && email === "" ? "1px solid #F00" : "none",
-          }}
+          onChange={(e) => handleChange(e)}
           type="email"
-          placeholder="Email"
           name="mail"
-        />
-        {mailError && <p className={styles.error}>{mailError}</p>}
+          placeholder="Email"
+        ></input>
+        {mailError ? <p className={styles.error}>Field is Required</p> : <></>}
 
         <input
-          value={mobile}
-          onChange={handleMobileChange}
-          style={{
-            border: mobileError && mobile === "" ? "1px solid #F00" : "none",
-          }}
+          onChange={(e) => handleChange(e)}
           type="tel"
-          placeholder="Mobile"
           name="mobile"
-        />
-        {mobileError && <p className={styles.error}>{mobileError}</p>}
-
+          placeholder="Mobile"
+        ></input>
+        {mobileError ? (
+          <p className={styles.error}>Field is Required</p>
+        ) : (
+          <></>
+        )}
         <label>
           <input
-            checked={isChecked}
-            onChange={handleCheckboxChange}
+            onChange={(e) =>
+              setFromValues({
+                ...formValues,
+                [e.target.name]: e.target.checked,
+              })
+            }
             type="checkbox"
             name="check"
           />
           Share my registration data with Superapp
         </label>
-        {checkboxError && <p className={styles.error}>{checkboxError}</p>}
+        {signUpError ? (
+          <p className={styles.error}>Check this box if you want to proceed</p>
+        ) : (
+          <></>
+        )}
 
-        <button onClick={(e) => handleSubmit(e)} type="submit">
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
           SIGN UP
         </button>
+        <footer className={styles.guide}>
+          <p>
+            By clicking on Sign up. you agree to Superapp
+            <span style={{ color: " #72db73" }}>
+              {" "}
+              Terms and Conditions of Use
+            </span>
+          </p>
+          <p>
+            To learn more about how Superapp collects, uses, shares and protects
+            your personal data please head Superapp
+            <span style={{ color: " #72db73" }}> Privacy Policy</span>
+          </p>
+        </footer>
       </form>
-
-      <footer className={styles.guide}>
-        <p>
-          By clicking on Sign up. you agree to Superapp
-          <span style={{ color: " #72db73" }}>
-            {" "}
-            Terms and Conditions of Use
-          </span>
-        </p>
-        <p>
-          To learn more about how Superapp collects, uses, shares and protects
-          your personal data please head Superapp
-          <span style={{ color: " #72db73" }}> Privacy Policy</span>
-        </p>
-      </footer>
     </div>
   );
-}
+};
 
 export default SignUp;

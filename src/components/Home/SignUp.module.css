@@ -2,8 +2,8 @@
   width: 51vw;
   background: #000;
   color: #fff;
-  height: 100vh;
-  padding: 3.1vw;
+  max-height: 100vh;
+  padding: 3.2vw;
   text-align: center;
 }
 
@@ -12,7 +12,7 @@
   font-family: "Single Day", sans-serif;
   font-weight: 400;
   color: #72db73;
-  margin-bottom: 4px;
+  margin: 2px;
 }
 
 .container p {
@@ -20,14 +20,14 @@
   font-family: DM Sans;
   font-weight: 400;
   font-size: 16px;
-  margin-bottom: 26px;
+  margin-bottom: 14px;
 }
 
 form input {
   display: block;
-  margin: 11px auto;
+  margin: 8px auto;
   font-size: 14px;
-  height: 40px;
+  height: 35px;
   padding: 12px;
   width: 65%;
   background-color: #292929;
@@ -44,7 +44,7 @@ form label {
   font-family: DM Sans;
   font-weight: 400;
   letter-spacing: 0.401px;
-  line-height: 60px;
+  line-height: 50px;
   margin-left: 4px;
 }
 
@@ -68,14 +68,13 @@ form button {
   font-family: Roboto;
   font-weight: 600;
 }
-
 .guide p {
   font-size: 13px;
   color: #7c7c7c;
   width: 61%;
-  margin: 10px auto;
+  margin: 7px auto;
   font-family: DM Sans;
-  font-weight: 400;
+  font-weight: 300;
   text-align: left;
 }
 
@@ -86,5 +85,7 @@ form .error {
   font-weight: 400;
   letter-spacing: 0.401px;
   text-align: left;
-  margin-left: 108px;
+  margin-left: 113px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
