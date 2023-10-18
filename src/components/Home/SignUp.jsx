@@ -15,32 +15,36 @@ const SignUp = () => {
   const [mailError, setMailError] = useState(false);
   const [mobileError, setMobileError] = useState(false);
   const [signUpError, setSignUpError] = useState(false);
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFromValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let valid = true;
-    if (!(formValues.name.trim().length > 0)) {
+    if (!formValues.name.match(/^[A-Za-z\s]{1,40}$/)) {
       setNameError(true);
       valid = false;
     } else {
       setNameError(false);
     }
-    if (!(formValues.username.trim().length > 0)) {
+    if (!formValues.username.match(/^[a-zA-Z0-9_]{3,15}$/)) {
       setUserNameError(true);
       valid = false;
     } else {
       setUserNameError(false);
     }
-    if (!(formValues.mail.trim().length > 0)) {
+
+    if (!formValues.mail.match(/\S+@\S+\.\S+/)) {
       setMailError(true);
       valid = false;
     } else {
       setMailError(false);
     }
-    if (!(formValues.mobile.trim().length > 0)) {
+
+    if (!formValues.mobile.match(/^\d{10}$/)) {
       setMobileError(true);
       valid = false;
     } else {
