@@ -132,7 +132,7 @@ const Category = () => {
           <br />
           category
         </p>
-        <div style={{ marginTop: "5vh", textAlign: "left" }}>
+        <div style={{ marginTop: "5vh", textAlign: "left"}}>
           <Selected
             categories={categories}
             color={"#148A08"}
