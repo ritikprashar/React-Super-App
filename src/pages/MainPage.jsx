@@ -40,7 +40,7 @@ const MainPage = () => {
             position: "absolute",
             bottom: "2vh",
             right: "7.2vw",
-            background: "green",
+            background: "#148A08",
             border: "none",
             padding: "6px",
             borderRadius: "12px",

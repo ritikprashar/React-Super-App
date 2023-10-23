@@ -43,8 +43,8 @@ const Movies = ({ type }) => {
                 alt=""
                 style={{
                   objectFit: "cover",
-                  width: "18vw",
-                  height: "33vh",
+                  width: "20vw",
+                  height: "30vh",
                   borderRadius: "12px",
                 }}
               />
