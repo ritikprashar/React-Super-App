@@ -41,28 +41,36 @@ const News = () => {
   return (
     <div
       style={{
-        height: "90vh",
-        width: "26vw",
+        height: "87vh",
+        width: "25vw",
         position: "relative",
         borderRadius: "12px",
-        padding: "6px",
+        background: "#fff",
+        marginLeft: "16px",
       }}
     >
       <img
         src={news.urlToImage}
-        style={{ height: "60vh", borderRadius: "12px", width: "26vw" }}
+        style={{
+          height: "61vh",
+          borderRadius: "12px",
+          width: "25vw",
+          borderBottomLeftRadius: "0",
+          borderBottomRightRadius: "0",
+        }}
         alt=""
       />
       <div
         style={{
           height: "25vh",
-          borderRadius: "12px",
-          width: "26vw",
+          borderBottomLeftRadius: "12px",
+          borderBottomRightRadius: "12px",
+          width: "25vw",
           background: "white",
-          fontSize: "0.8rem",
+          fontSize: "0.9rem",
           fontFamily: "Roboto",
           fontWeight: "500",
-          padding: "23px",
+          padding: "15px",
           color: "#272727",
         }}
       >
@@ -71,7 +79,7 @@ const News = () => {
       <div
         style={{
           position: "absolute",
-          width: "26vw",
+          width: "25vw",
           height: "20vh",
           background: "rgba(0, 0, 0, 0.74)",
           top: "41vh",
