@@ -45,6 +45,7 @@ const Browse = () => {
         >
           Entertainment according to your choice
         </p>
+
       </div>
       <Movies />
     </>
